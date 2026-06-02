@@ -61,8 +61,57 @@
   @media(max-width:400px){ body{padding:32px 12px 48px !important;} }
   html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
 </style>
+<style id="sg-gate-style">
+  #sg-gate{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(160deg,#143a63 0%,#1c5a8a 55%,#3fa89c 100%);
+    font-family:"Jost",system-ui,sans-serif;}
+  #sg-gate .box{background:rgba(255,255,255,.96);border-radius:22px;padding:38px 30px;width:min(90vw,360px);
+    text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.28);}
+  #sg-gate h2{font-family:"Spectral",serif;color:#143a63;margin:0 0 4px;font-size:26px;font-weight:500;}
+  #sg-gate p{color:#1c5a8a;margin:0 0 20px;font-size:13px;letter-spacing:.04em;}
+  #sg-gate input{width:100%;box-sizing:border-box;padding:13px 14px;border:1.5px solid rgba(20,58,99,.25);
+    border-radius:12px;font-size:16px;color:#143a63;outline:none;transition:border-color .2s;-webkit-appearance:none;}
+  #sg-gate input:focus{border-color:#3fa89c;}
+  #sg-gate button{margin-top:14px;width:100%;padding:13px;border:0;border-radius:12px;cursor:pointer;
+    background:linear-gradient(90deg,#1c5a8a,#3fa89c);color:#fff;font-size:15px;font-weight:600;letter-spacing:.04em;}
+  #sg-gate button:active{transform:translateY(1px);}
+  #sg-gate .err{color:#c0392b;font-size:12px;min-height:16px;margin-top:10px;}
+  #sg-gate.shake .box{animation:sgshake .35s;}
+  @keyframes sgshake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+  body.sg-locked{overflow:hidden;}
+</style>
 </head>
-<body><div class="wrap">
+<body><div id="sg-gate">
+  <div class="box">
+    <h2>SeaGlow</h2>
+    <p>Enter password to view</p>
+    <input id="sg-pw" type="password" placeholder="Password" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" inputmode="text" aria-label="Password">
+    <button id="sg-go">Unlock</button>
+    <div class="err" id="sg-err"></div>
+  </div>
+</div>
+<script>
+  (function(){
+    var KEY="sg_unlocked";
+    function unlock(){var g=document.getElementById("sg-gate");if(g)g.remove();document.body.classList.remove("sg-locked");}
+    if(sessionStorage.getItem(KEY)==="1"){unlock();}
+    else{
+      document.body.classList.add("sg-locked");
+      window.addEventListener("DOMContentLoaded",function(){
+        var inp=document.getElementById("sg-pw"),btn=document.getElementById("sg-go"),
+            err=document.getElementById("sg-err"),gate=document.getElementById("sg-gate");
+        function go(){
+          if((inp.value||"").trim().toLowerCase()==="seaglow"){sessionStorage.setItem(KEY,"1");unlock();}
+          else{err.textContent="Incorrect password";gate.classList.add("shake");inp.value="";inp.focus();
+            setTimeout(function(){gate.classList.remove("shake");},400);}
+        }
+        btn.addEventListener("click",go);
+        inp.addEventListener("keydown",function(e){if(e.key==="Enter")go();});
+        inp.focus();
+      });
+    }
+  })();
+</script><div class="wrap">
   <header class="page">
     <p class="eyebrow">SeaGlow · Signature Variations</p>
     <h1>Fifty crests, one signature</h1>
