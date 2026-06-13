@@ -1,28 +1,65 @@
 <!DOCTYPE html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SeaGlow — 20 Signature Variations</title>
+<title>SeaGlow - 20 Signature Variations</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500&family=Jost:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root{--teal:#3FA89C;--ocean:#1C5A8A;--navy:#143A63;--paper:#FAFAF7;}
+  :root{
+    --teal:#3FA89C;--ocean:#1C5A8A;--navy:#143A63;--paper:#FAFAF7;
+    --wall:#0b1d2a;--ink:#eaf3f6;--ink-dim:rgba(234,243,246,.62);
+    --hair:rgba(255,255,255,.08);--r:16px;
+    --ease:cubic-bezier(.23,1,.32,1);
+  }
   *{box-sizing:border-box;} html,body{margin:0;}
-  body{background:var(--paper);color:var(--navy);font-family:"Jost",system-ui,sans-serif;-webkit-font-smoothing:antialiased;padding:70px 40px 120px;line-height:1.5;}
-  .wrap{max-width:1280px;margin:0 auto;}
-  header.page{max-width:700px;margin:0 0 22px;}
-  .eyebrow{font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--teal);font-weight:500;margin:0 0 16px;}
-  header.page h1{font-family:"Spectral",serif;font-weight:400;font-size:34px;margin:0 0 14px;}
-  header.page p{font-size:15px;opacity:.66;margin:0;}
-  .ghead{margin:34px 0 14px;font-family:"Spectral",serif;font-size:18px;border-bottom:1px solid rgba(20,58,99,.14);padding-bottom:10px;}
-  .ghead span{font-size:12px;font-family:"Jost";opacity:.5;margin-left:10px;}
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
-  @media(max-width:1080px){.grid{grid-template-columns:repeat(2,1fr);}}
+  html{scroll-behavior:smooth;overflow-x:hidden;}
+  body{
+    background:
+      radial-gradient(120% 78% at 50% -12%, rgba(20,80,111,.45) 0%, transparent 60%),
+      radial-gradient(70% 50% at 100% 2%, rgba(63,168,156,.16) 0%, transparent 55%),
+      var(--wall);
+    background-attachment:fixed;
+    color:var(--ink);font-family:"Jost",system-ui,sans-serif;-webkit-font-smoothing:antialiased;
+    padding:96px 40px 140px;line-height:1.55;min-height:100dvh;
+  }
+  .wrap{max-width:1200px;margin:0 auto;}
+  /* page header */
+  header.page{max-width:720px;margin:0 0 8px;}
+  .eyebrow{font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--teal);font-weight:500;margin:0 0 18px;}
+  header.page h1{font-family:"Spectral",serif;font-weight:400;font-size:clamp(34px,5vw,52px);line-height:1.05;letter-spacing:-.01em;margin:0 0 18px;}
+  header.page h1 em{font-style:italic;color:var(--teal);}
+  header.page p{font-size:16px;color:var(--ink-dim);margin:0;max-width:60ch;}
+  .rule{height:1px;border:0;margin:34px 0 0;background:linear-gradient(90deg,var(--teal),transparent 72%);opacity:.55;}
+  /* section header */
+  .ghead{margin:74px 0 24px;font-family:"Spectral",serif;font-weight:400;font-size:22px;color:var(--ink);
+    display:flex;align-items:baseline;gap:14px;padding-bottom:14px;border-bottom:1px solid var(--hair);}
+  .ghead span{font-size:12px;font-family:"Jost";letter-spacing:.04em;color:var(--ink-dim);}
+  /* grid */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+  @media(max-width:1080px){.grid{grid-template-columns:repeat(2,1fr);gap:22px;}}
   @media(max-width:680px){.grid{grid-template-columns:1fr;}}
-  .card{background:#fff;border:1px solid rgba(20,58,99,.10);border-radius:18px;overflow:hidden;}
-  .stage{display:flex;align-items:center;justify-content:center;padding:6px;}
-  .stage svg{width:100%;height:auto;border-radius:12px;}
-  .cap{display:flex;align-items:center;gap:10px;padding:14px 20px;border-top:1px solid rgba(20,58,99,.08);font-size:13px;}
-  .cap .vn{font-size:11px;letter-spacing:.12em;color:var(--teal);font-weight:600;}
-  .cap .t{font-weight:500;white-space:nowrap;} .cap .d{margin-left:auto;font-size:11px;opacity:.55;text-align:right;}
+  /* specimen card (white plinth floating on the oceanic wall) */
+  .card{background:#fff;border:1px solid rgba(255,255,255,.06);border-radius:var(--r);overflow:hidden;
+    box-shadow:0 1px 2px rgba(5,15,22,.5),0 18px 40px -18px rgba(5,15,22,.7);
+    transition:box-shadow .3s var(--ease),transform .45s var(--ease),opacity .6s var(--ease);}
+  .card:focus-visible{outline:2px solid var(--teal);outline-offset:3px;}
+  @media(scripting:enabled){
+    .card{opacity:0;transform:translateY(16px) scale(.985);will-change:transform,opacity;}
+    .card.in{opacity:1;transform:none;}
+  }
+  @media(hover:hover) and (pointer:fine){
+    .card:hover{transform:translateY(-5px);box-shadow:0 2px 4px rgba(5,15,22,.45),0 32px 64px -22px rgba(10,55,75,.85);}
+  }
+  .card:active{transform:translateY(-2px) scale(.99);transition-duration:.12s;}
+  .stage{display:flex;align-items:center;justify-content:center;padding:10px;}
+  .stage svg{width:100%;height:auto;border-radius:10px;}
+  .cap{display:flex;align-items:center;gap:10px;padding:15px 20px;border-top:1px solid rgba(20,58,99,.08);font-size:13px;color:var(--navy);}
+  .cap .vn{font-size:10.5px;letter-spacing:.14em;color:var(--ocean);font-weight:600;font-variant-numeric:tabular-nums;}
+  .cap .t{font-weight:500;white-space:nowrap;}
+  .cap .d{margin-left:auto;font-size:11px;color:rgba(20,58,99,.5);text-align:right;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .card{opacity:1 !important;transform:none !important;transition:box-shadow .2s ease;}
+  }
 
   @media print {
     @page { size: portrait; margin: 1cm; }
@@ -51,9 +88,9 @@
     /* start each major section on a fresh page so headers stay with their grid */
     #sec-allura, #sec-fresh, #sec-more { break-before: page; }
   }
-</style><meta name="description" content="SeaGlow — 50 signature script logo variations for a sea moss gel brand. Watery teal to navy gradient wordmarks with botanical crests.">
+</style><meta name="description" content="SeaGlow - 50 signature script logo variations for a sea moss gel brand. Watery teal to navy gradient wordmarks with botanical crests.">
 <meta name="theme-color" content="#143a63">
-<meta property="og:title" content="SeaGlow — Signature Variations">
+<meta property="og:title" content="SeaGlow - Signature Variations">
 <meta property="og:description" content="50 script logo concepts with watery gradient and botanical crests.">
 <style>
   img,svg{max-width:100%;height:auto;}
@@ -63,28 +100,42 @@
 </style>
 <style id="sg-gate-style">
   #sg-gate{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;
-    background:linear-gradient(160deg,#143a63 0%,#1c5a8a 55%,#3fa89c 100%);
+    background:
+      radial-gradient(120% 80% at 50% -10%, rgba(28,90,138,.55) 0%, transparent 60%),
+      radial-gradient(80% 60% at 100% 100%, rgba(63,168,156,.22) 0%, transparent 55%),
+      #0b1d2a;
     font-family:"Jost",system-ui,sans-serif;}
-  #sg-gate .box{background:rgba(255,255,255,.96);border-radius:22px;padding:38px 30px;width:min(90vw,360px);
-    text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.28);}
-  #sg-gate h2{font-family:"Spectral",serif;color:#143a63;margin:0 0 4px;font-size:26px;font-weight:500;}
-  #sg-gate p{color:#1c5a8a;margin:0 0 20px;font-size:13px;letter-spacing:.04em;}
-  #sg-gate input{width:100%;box-sizing:border-box;padding:13px 14px;border:1.5px solid rgba(20,58,99,.25);
-    border-radius:12px;font-size:16px;color:#143a63;outline:none;transition:border-color .2s;-webkit-appearance:none;}
-  #sg-gate input:focus{border-color:#3fa89c;}
-  #sg-gate button{margin-top:14px;width:100%;padding:13px;border:0;border-radius:12px;cursor:pointer;
-    background:linear-gradient(90deg,#1c5a8a,#3fa89c);color:#fff;font-size:15px;font-weight:600;letter-spacing:.04em;}
-  #sg-gate button:active{transform:translateY(1px);}
-  #sg-gate .err{color:#c0392b;font-size:12px;min-height:16px;margin-top:10px;}
+  #sg-gate .box{position:relative;background:#fff;border-radius:16px;padding:40px 32px 32px;width:min(90vw,360px);
+    text-align:center;border:1px solid rgba(255,255,255,.5);
+    box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 30px 70px -20px rgba(5,15,22,.7);
+    animation:sgrise .5s cubic-bezier(.23,1,.32,1) both;}
+  #sg-gate .kick{font-size:10px;letter-spacing:.34em;text-transform:uppercase;color:#3FA89C;font-weight:600;margin:0 0 10px;}
+  #sg-gate h2{font-family:"Spectral",serif;color:#143a63;margin:0 0 6px;font-size:28px;font-weight:500;}
+  #sg-gate p{color:rgba(20,58,99,.6);margin:0 0 22px;font-size:13px;letter-spacing:.02em;}
+  #sg-gate input{width:100%;box-sizing:border-box;padding:13px 15px;border:1.5px solid rgba(20,58,99,.2);
+    border-radius:11px;font-size:16px;color:#143a63;outline:none;background:#fbfcfc;
+    transition:border-color .18s ease,box-shadow .18s ease;-webkit-appearance:none;}
+  #sg-gate input::placeholder{color:rgba(20,58,99,.38);}
+  #sg-gate input:focus-visible{border-color:#3fa89c;box-shadow:0 0 0 3px rgba(63,168,156,.18);}
+  #sg-gate button{margin-top:14px;width:100%;padding:13px;border:0;border-radius:11px;cursor:pointer;
+    background:linear-gradient(100deg,#143A63,#1c5a8a 55%,#3fa89c);color:#fff;font-size:15px;font-weight:600;
+    letter-spacing:.03em;transition:transform .14s cubic-bezier(.23,1,.32,1),filter .18s ease;}
+  @media(hover:hover) and (pointer:fine){#sg-gate button:hover{filter:brightness(1.06);}}
+  #sg-gate button:active{transform:scale(.975);}
+  #sg-gate button:focus-visible{outline:2px solid #3fa89c;outline-offset:2px;}
+  #sg-gate .err{color:#c0392b;font-size:12px;min-height:16px;margin-top:12px;}
   #sg-gate.shake .box{animation:sgshake .35s;}
+  @keyframes sgrise{from{opacity:0;transform:translateY(12px) scale(.97);}to{opacity:1;transform:none;}}
   @keyframes sgshake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+  @media (prefers-reduced-motion: reduce){#sg-gate .box{animation:none;}}
   body.sg-locked{overflow:hidden;}
 </style>
 </head>
 <body><div id="sg-gate">
   <div class="box">
+    <p class="kick">Private gallery</p>
     <h2>SeaGlow</h2>
-    <p>Enter password to view</p>
+    <p>Enter the password to view the collection</p>
     <input id="sg-pw" type="password" placeholder="Password" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" inputmode="text" aria-label="Password">
     <button id="sg-go">Unlock</button>
     <div class="err" id="sg-err"></div>
@@ -111,13 +162,40 @@
       });
     }
   })();
-</script><div class="wrap">
+</script>
+<script>
+  (function(){
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    function init(){
+      var cards = Array.prototype.slice.call(document.querySelectorAll(".card"));
+      if(reduce || !("IntersectionObserver" in window)){
+        cards.forEach(function(c){c.classList.add("in");}); return;
+      }
+      var io = new IntersectionObserver(function(entries){
+        entries.filter(function(e){return e.isIntersecting;})
+          .sort(function(a,b){return cards.indexOf(a.target)-cards.indexOf(b.target);})
+          .forEach(function(e,i){
+            var el=e.target, d=Math.min(i,6)*55;
+            el.style.transitionDelay=d+"ms";
+            el.classList.add("in");
+            io.unobserve(el);
+            setTimeout(function(){el.style.transitionDelay="";}, 650+d); // clear so hover stays snappy
+          });
+      },{rootMargin:"0px 0px -7% 0px",threshold:0.08});
+      cards.forEach(function(c){io.observe(c);});
+    }
+    if(document.readyState!=="loading") init(); else document.addEventListener("DOMContentLoaded",init);
+  })();
+</script>
+<div class="wrap">
   <header class="page">
     <p class="eyebrow">SeaGlow · Signature Variations</p>
-    <h1>Fifty crests, one signature</h1>
-    <p>The flowing script wordmark with the watery teal→ocean→navy gradient and spaced “Sea Moss Gel” tagline, each crowned by a distinct botanical or coastal icon. The first ten are set in Great Vibes; the second ten switch to Allura — softer and rounder — for fresh inspiration.</p>
+    <h1>Fifty crests, <em>one signature</em></h1>
+    <p>The flowing script wordmark with the watery teal-to-navy gradient and spaced “Sea Moss Gel” tagline, each crowned by a distinct botanical or coastal icon. The first ten are set in Great Vibes; the next ten switch to Allura, softer and rounder, for fresh inspiration.</p>
   </header>
-  <div class="ghead">Great Vibes <span>01–10 · flourishing signature</span></div>
+  <hr class="rule">
+  <div style="height:8px"></div>
+  <div class="ghead">Great Vibes <span>01-10 · flourishing signature</span></div>
   <div class="grid">
 
       <article class="card"><div class="stage"><svg id="sg-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 660" width="660" height="660" role="img" aria-label="SeaGlow">
@@ -1347,7 +1425,7 @@
   </svg></div>
         <div class="cap"><span class="vn">10</span><span class="t">Diamond Emblem</span><span class="d">Sprig in a lozenge</span></div></article>
   </div>
-  <div class="ghead" id="sec-allura">Allura <span>11–20 · softer, rounder cut</span></div>
+  <div class="ghead" id="sec-allura">Allura <span>11-20 · softer, rounder cut</span></div>
   <div class="grid">
 
       <article class="card"><div class="stage"><svg id="sg-11" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 660" width="660" height="660" role="img" aria-label="SeaGlow">
@@ -2597,7 +2675,7 @@
         <div class="cap"><span class="vn">20</span><span class="t">Laurel Wreath</span><span class="d">Allura - leafy laurel</span></div></article>
   </div>
 
-  <div class="ghead" id="sec-fresh">Fresh Icons <span>21–30 · ten distinct marks</span></div>
+  <div class="ghead" id="sec-fresh">Fresh Icons <span>21-30 · ten distinct marks</span></div>
   <div class="grid">
 
       <article class="card"><div class="stage"><svg id="sg-21" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 660" width="660" height="660" role="img" aria-label="SeaGlow">
@@ -5465,7 +5543,7 @@
         <div class="cap"><span class="vn">30</span><span class="t">Sea Anemone</span><span class="d">radial curling tendrils</span></div></article>
   </div>
 
-  <div class="ghead" id="sec-more">Twenty More <span>31–50 · shells, botanicals, water & wellness</span></div>
+  <div class="ghead" id="sec-more">Twenty More <span>31-50 · shells, botanicals, water & wellness</span></div>
   <div class="grid">
 
       <article class="card"><div class="stage"><svg id="sg-31" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 660" width="660" height="660" role="img" aria-label="SeaGlow">
